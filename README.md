@@ -1,4 +1,4 @@
-# Easy Jira
+# Easy Jira for Unity
 
 Easy Jira allow you to easy implement a feedback system for your game in less than 5 minutes.
 
