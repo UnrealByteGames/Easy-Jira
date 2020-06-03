@@ -1,5 +1,7 @@
 # Easy Jira for Unity
 
+https://assetstore.unity.com/packages/tools/integration/easy-jira-111744
+
 Easy Jira allow you to easy implement a feedback system for your game in less than 5 minutes.
 
 # **IMPORTANT INFORMATION**
