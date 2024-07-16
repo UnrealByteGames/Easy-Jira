@@ -1,4 +1,4 @@
-
+[TEST]
 # Easy Jira for Unity
 *Open source version of the currently deprecated Unity asset: https://assetstore.unity.com/packages/tools/integration/easy-jira-111744
 The asset was deprecated due to the use of the word “Jira” in the name*
