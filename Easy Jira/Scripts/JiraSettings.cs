@@ -148,6 +148,11 @@ namespace UnrealByte.EasyJira {
             sanitizeBaseURL();
             return this.jiraBaseRestURL + this.jiraUserURL + "/assignable/search";
         }
+        
+        public string getJiraUserAssignableProjectURL() {
+            sanitizeBaseURL();
+            return this.jiraBaseRestURL + this.jiraUserURL + "/assignable/multiProjectSearch";
+        }
 
         public string getJiraMyPermissionsURL() {
             sanitizeBaseURL();

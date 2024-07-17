@@ -332,6 +332,51 @@ namespace UnrealByte.EasyJira {
             }
             yield return new WaitForSeconds(2f);
         }
+        
+        
+        /// <summary>
+        /// Find users assignable to Project
+        /// Returns a list of users that can be assigned to an issue in a Project
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <param name="query"></param>
+        /// <param name="issueKey"></param>
+        /// <param name="callback"></param>
+        public static IEnumerator APIDownloadUsersAssignable(JiraSettings settings, string query, string projectKey, Action<List<JUser>> callback) {
+            string encodedCredentials = JiraConnect.GenerateBasicAuth(settings.jiraUser, settings.jiraToken);
+            string url = settings.getJiraUserAssignableProjectURL() + "?query="+query+"&projectKeys="+projectKey;
+
+            var www = new UnityWebRequest(url, "GET");
+            www.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+            www.SetRequestHeader("Authorization", "Basic " + encodedCredentials);
+            www.SetRequestHeader("Content-Type", "application/json");
+            www.SetRequestHeader("Accept", "application/json");
+
+            yield return www.SendWebRequest();
+            try {                
+                if (!www.isNetworkError && !www.isHttpError) {
+                    List<JUser> users = new List<JUser>();
+                    JsonData data = JsonMapper.ToObject(www.downloadHandler.text);
+                    if (data.Count > 0) {                        
+                        for (int i = 0; i < data.Count; i++) {
+                            JUser user = new JUser();
+                            user.accountId = data[i]["accountId"].ToString();
+                            user.emailAddress = data[i]["emailAddress"].ToString();
+                            user.displayName = data[i]["displayName"].ToString();
+                            user.avatarURL = data[i]["avatarUrls"]["24x24"].ToString();
+                            users.Add(user);
+                        }
+                    }
+                    callback(users);
+                } else {
+                    Debug.LogError("error: " + www.downloadHandler.text);
+                }
+            } catch (Exception e) {
+                Debug.LogError(e);
+            }
+            yield return new WaitForSeconds(2f);
+        }
+        
 
         /// <summary>
         /// Download an issue from given jIssueKey (issue key)
