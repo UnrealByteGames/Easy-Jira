@@ -10,7 +10,8 @@ namespace UnrealByte.EasyJira {
         // Dont change this variable names.
         public JProject project;
         public string summary = "";
-        public string description = "";        
+        public string description = "";
+        public JUser assignee = new JUser();
         public JIssueType issuetype;
         public JIssuePriority priority;
 
