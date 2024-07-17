@@ -155,7 +155,7 @@ namespace UnrealByte.EasyJira {
             } else {                
                 JsonData data = JsonMapper.ToObject(www.downloadHandler.text);
                 if (data != null) {
-                    settings.jiraName = data["name"].ToString();
+                    settings.jiraName = data["displayName"].ToString();
                     settings.jiraAccountId = data["accountId"].ToString();
                 }
                 www = new UnityWebRequest(settings.getJiraMyPermissionsURL() + "?permissions=ASSIGN_ISSUES", "GET");
